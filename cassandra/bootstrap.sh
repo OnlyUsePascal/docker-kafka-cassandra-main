@@ -10,7 +10,7 @@ fi
 if [ "$1" = 'dse' -a "$2" = 'cassandra' ]; then
   # See if we've already completed bootstrapping
   if [ ! -f /var/lib/cassandra/cassandra_bootstrapped ]; then
-    echo 'Setting up Cassandra'
+    echo '=> Setting up Cassandra'
 
     # Invoke the entrypoint script to start Cassandra as a background job and get the pid
     # starting Cassandra in the background the first time allows us to monitor progress and register schema

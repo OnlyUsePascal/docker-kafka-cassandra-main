@@ -4,6 +4,8 @@ import configparser
 import os
 import time
 from collections import namedtuple
+
+from websocket import send
 from dataprep.connector import connect
 from kafka import KafkaProducer
 
@@ -33,7 +35,9 @@ async def get_weather(city):
 def run():
     locations = ["Vancouver"]
     iterator = 0
-    repeat_request = SLEEP_TIME / len(locations)
+    # repeat_request = SLEEP_TIME / len(locations)
+    repeat_request = 10
+
     print("Setting up Weather producer at {}".format(KAFKA_BROKER_URL))
     producer = KafkaProducer(
         bootstrap_servers=[KAFKA_BROKER_URL],
@@ -50,6 +54,8 @@ def run():
             "%Y-%m-%d %H:%M:%S", now)
         current_weather = current_weather.to_json(orient="records")
         sendit = current_weather[1:-1]
+        print(sendit)
+
         # adding prints for debugging in logs
         print("Sending new weather report iteration - {}".format(iterator))
         producer.send(TOPIC_NAME, value=sendit)

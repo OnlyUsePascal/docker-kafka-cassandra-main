@@ -43,6 +43,7 @@ services:
       KAFKA_MANAGER_USERNAME: admin
       KAFKA_MANAGER_PASSWORD: bigbang
     command: -Dpidfile.path=/dev/null
+    
   connect:
     build:
       context: .
