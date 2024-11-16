@@ -2,8 +2,8 @@ version: '3'
 
 services:
   weatherconsumer:
-    container_name: data-consumer
-    image: data-consumer
+    container_name: consumer-logging
+    image: consumer-logging
     build: .
     environment:
       KAFKA_BROKER_URL: broker:9092

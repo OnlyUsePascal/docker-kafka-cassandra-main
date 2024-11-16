@@ -2,9 +2,9 @@ version: "3"
 
 services:
   datavis:
-    container_name: data-vis
+    container_name: consumer-vis
     hostname: data-vis
-    image: data-vis
+    image: consumer-vis
     build: .
     environment:
       CASSANDRA_HOST: cassandradb
