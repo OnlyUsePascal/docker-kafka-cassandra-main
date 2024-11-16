@@ -2,10 +2,10 @@ version: "3"
 
 services:
   datavis:
-    container_name: datavis
-    hostname: datavis
-    build:
-      context: .
+    container_name: data-vis
+    hostname: data-vis
+    image: data-vis
+    build: .
     environment:
       CASSANDRA_HOST: cassandradb
       CASSANDRA_KEYSPACE: kafkapipeline

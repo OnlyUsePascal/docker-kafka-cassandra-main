@@ -21,6 +21,7 @@ curl -s \
     "topic.twittersink.kafkapipeline.twitterdata.consistencyLevel": "LOCAL_QUORUM"
   }
 }'
+
 echo "Starting Weather Sink"
 curl -s \
      -X POST http://localhost:8083/connectors \

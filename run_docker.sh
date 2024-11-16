@@ -10,3 +10,4 @@ docker compose \
   --detach \
   --build \
   $opts
+
