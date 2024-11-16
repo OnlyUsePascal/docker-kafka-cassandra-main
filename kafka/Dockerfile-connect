@@ -1,17 +1,21 @@
-FROM confluentinc/cp-kafka-connect-base:5.3.0
-
-RUN curl -O -L "https://downloads.datastax.com/kafka/kafka-connect-cassandra-sink.tar.gz" \
-    && mkdir datastax-connector \
-    && tar xzf kafka-connect-cassandra-sink.tar.gz -C datastax-connector --strip-components=1 \
-    && mv datastax-connector/kafka-connect* datastax-connector/kafka-connect-cassandra.jar
-
-ENV CONNECT_PLUGIN_PATH="/usr/share/java,/datastax-connector/kafka-connect-cassandra.jar"
+FROM confluentinc/cp-kafka-connect:7.7.1
 
 WORKDIR /usr/app
 
-COPY connect/ .
 USER root
+
+RUN curl -O -L "https://downloads.datastax.com/kafka/kafka-connect-cassandra-sink.tar.gz"
+
+RUN mkdir datastax-connector \
+    && tar xzf kafka-connect-cassandra-sink.tar.gz -C datastax-connector --strip-components=1 \
+    && mv datastax-connector/kafka-connect* datastax-connector/kafka-connect-cassandra.jar
+
+ENV CONNECT_PLUGIN_PATH="/usr/share/java,/usr/app/datastax-connector/kafka-connect-cassandra.jar"
+
+RUN echo 123
+
+COPY connect/ .
+
 RUN chmod +x *.sh
 
-CMD [ "/bin/bash", "-c", "echo \"Launching Kafka Connect worker\" & \
-        /etc/confluent/docker/run & /usr/app/start-and-wait.sh"]
+CMD /bin/bash -c /usr/app/start-and-wait.sh
