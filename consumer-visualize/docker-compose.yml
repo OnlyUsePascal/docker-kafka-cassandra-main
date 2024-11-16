@@ -14,7 +14,7 @@ services:
     ports:
         - 8888:8888
     volumes:
-      - $PWD/consumer-visualize/python:/usr/app
+      - ./python:/usr/app
 networks:
   default:
     external:

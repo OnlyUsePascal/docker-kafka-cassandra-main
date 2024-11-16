@@ -21,21 +21,21 @@ usage() {
 auto_mode() {
   echo "Auto mode selected."
 
-  echo 'Stopping containers ...'
-  docker stop $(docker ps -a -q)
+  # echo 'Stopping containers ...'
+  # docker stop $(docker ps -a -q)
   
   local containers=("warehouse" \
     "kafka" \
     "producer-owm" \
     "consumer-logging" \
     "consumer-visualize" \
-    )
-  
+  )
+
   echo 'Rerunning containers ...'
   for container in "${containers[@]}"; do
     echo "Running container: $container"
     name_mode "$container"
-    sleep 10
+    sleep 3
   done
 }
 

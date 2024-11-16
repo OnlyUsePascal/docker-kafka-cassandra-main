@@ -10,7 +10,7 @@ services:
       - 7000:7000
       - 9042:9042
     volumes:
-      - $PWD/warehouse/data:/var/lib/cassandra
+      - ./data:/var/lib/cassandra
 networks:
   default:
     external:

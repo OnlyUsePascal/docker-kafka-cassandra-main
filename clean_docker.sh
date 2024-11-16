@@ -7,5 +7,5 @@ docker stop $(docker ps -a -q)
 # docker rm $(docker ps -a -q)
 
 # echo '=> deleteing images ..'
-# docker image rm $(docker images -q) 
+# docker image rm --force $(docker images -q) 
 
