@@ -28,3 +28,9 @@ curl -s \
      -X POST http://localhost:8083/connectors \
      -H "Content-Type: application/json" \
      -d @config-weathersink.json
+
+# echo "Starting Faker Sink"
+# curl -s \
+#      -X POST http://localhost:8083/connectors \
+#      -H "Content-Type: application/json" \
+#      -d @config-weathersink.json
