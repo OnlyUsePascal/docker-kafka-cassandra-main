@@ -21,3 +21,10 @@ CREATE TABLE twitterdata (
   classification TEXT,
   PRIMARY KEY (location, tweet_date)
 );
+
+CREATE TABLE IF NOT EXISTS kafkapipeline.fakerdata (
+  name TEXT,
+  address TEXT,
+  year INT,
+  PRIMARY KEY (name, address)
+);
