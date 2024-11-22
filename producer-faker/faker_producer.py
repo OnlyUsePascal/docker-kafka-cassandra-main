@@ -27,7 +27,7 @@ def json_serializer(data):
     return json.dumps(data).encode("utf-8")
     
 def run():
-    cooldown = 5
+    cooldown = 10
 
     print("Setting up Weather producer at {}".format(KAFKA_BROKER_URL))
     producer = KafkaProducer(
