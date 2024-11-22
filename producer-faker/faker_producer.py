@@ -20,11 +20,18 @@ def get_registered_user():
     return {
         "name": faker.name(),
         "address": faker.address(),
-        "year": faker.year()
+        "year": faker.year(), 
+        "phone" : faker.phone_number(),
+        "dob" : faker.date_of_birth(),
+        # "country" : faker.country(), 
+        # "created_at" : faker.date(),
+        # "fav_color" : faker.color(),
+        # "email" : faker.email(),
+        # "locale" : faker.locale()
     }
 
 def json_serializer(data):
-    return json.dumps(data).encode("utf-8")
+    return json.dumps(data, default=str).encode("utf-8")
     
 def run():
     cooldown = 10
