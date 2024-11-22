@@ -9,9 +9,8 @@
     "tasks.max": "4",
     "topics": "faker",
     "contactPoints": "cassandradb",
-    "keyspace" : "kafkapipeline",
     "loadBalancing.localDc": "datacenter1",
-    "topic.weather.kafkapipeline.fakerreport.mapping": "location=value.location, forecastdate=value.report_time, description=value.description, temp=value.temp, feels_like=value.feels_like, temp_min=value.temp_min, temp_max=value.temp_max, pressure=value.pressure, humidity=value.humidity, wind=value.wind, sunrise=value.sunrise, sunset=value.sunset",
-    "topic.weather.kafkapipeline.fakerreport.consistencyLevel": "LOCAL_QUORUM"
+    "topic.faker.kafkapipeline.fakerdata.mapping": "name=value.name, address=value.address, year=value.year",
+    "topic.faker.kafkapipeline.fakerdata.consistencyLevel": "LOCAL_QUORUM"
   }
 }
