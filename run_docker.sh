@@ -24,7 +24,8 @@ auto_mode() {
   # echo 'Stopping containers ...'
   # docker stop $(docker ps -a -q)
   
-  local containers=("warehouse" \
+  local containers=(\
+    "warehouse" \
     "kafka" \
     "producer-owm" \
     "producer-faker" \

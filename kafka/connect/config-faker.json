@@ -10,7 +10,7 @@
     "topics": "faker",
     "contactPoints": "cassandradb",
     "loadBalancing.localDc": "datacenter1",
-    "topic.faker.kafkapipeline.fakerdata.mapping": "name=value.name, address=value.address, year=value.year",
+    "topic.faker.kafkapipeline.fakerdata.mapping": "name=value.name, address=value.address, year=value.year, phone=value.phone, dob=value.dob, country=value.country, created_at=value.created_at, fav_color=value.fav_color, email=value.email, locale=value.locale",
     "topic.faker.kafkapipeline.fakerdata.consistencyLevel": "LOCAL_QUORUM"
   }
 }
