@@ -10,7 +10,7 @@ services:
       TOPIC_NAME: weather
       CASSANDRA_HOST: cassandradb
       CASSANDRA_KEYSPACE: kafkapipeline
-    command: ["python", "-u","python/weather_consumer.py"]
+    command: ["python", "-u","python/logging_consumer.py"]
 
 networks:
   default:

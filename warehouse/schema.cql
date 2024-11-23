@@ -1,4 +1,4 @@
-CREATE TABLE weatherreport (
+CREATE TABLE IF NOT EXISTS weatherreport (
   forecastdate TIMESTAMP,
   location TEXT,
   description TEXT,
@@ -14,17 +14,23 @@ CREATE TABLE weatherreport (
   PRIMARY KEY (location, forecastdate)
 );
 
-CREATE TABLE twitterdata (
-  tweet_date TIMESTAMP,
-  location TEXT,
-  tweet TEXT,
-  classification TEXT,
-  PRIMARY KEY (location, tweet_date)
-);
+TRUNCATE kafkapipeline.weatherreport;
+
 
 CREATE TABLE IF NOT EXISTS kafkapipeline.fakerdata (
   name TEXT,
   address TEXT,
   year INT,
+  phone TEXT, 
+  dob DATE,
+  country TEXT,
+  created_at DATE,
+  fav_color TEXT,
+  email TEXT,
+  locale TEXT,
   PRIMARY KEY (name, address)
 );
+
+TRUNCATE kafkapipeline.fakerdata;
+
+

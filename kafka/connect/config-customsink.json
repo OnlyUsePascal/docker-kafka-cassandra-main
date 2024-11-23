@@ -1,0 +1,17 @@
+{
+  "name": "customsink",
+  "config": {
+    "connector.class": "com.datastax.oss.kafka.sink.CassandraSinkConnector",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",  
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable":"false",
+    "tasks.max": "4",
+    "topics": "custom",
+    "contactPoints": "cassandradb",
+    "keyspace" : "kafkapipeline",
+    "loadBalancing.localDc": "datacenter1",
+    "topic.custom.kafkapipeline.customdata.mapping": "time=value.time, symbols=value.symbols, bid=value.bid, ask=value.ask, last=value.last",
+    "topic.custom.kafkapipeline.customdata.consistencyLevel": "LOCAL_QUORUM"
+  }
+}

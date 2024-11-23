@@ -19,14 +19,17 @@ if __name__ == "__main__":
     csvbackupfile = parent + "weather.csv"
 
     print("Setting up Kafka consumer at {}".format(KAFKA_BROKER_URL))
-    consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=[KAFKA_BROKER_URL])
+    TOPIC_NAME = ['weather', 'faker', 'custom']
+    consumer = KafkaConsumer(bootstrap_servers=[KAFKA_BROKER_URL])
+    consumer.subscribe(TOPIC_NAME)
     
     print('Waiting for msg....')
     for msg in consumer:
         # print('got one!')
         msg = msg.value.decode('ascii')
         jsonData=json.loads(msg)
-        print(jsonData)
+        
+        print(msg)
         # df = pd.DataFrame([jsonData])
         # print("Saving {} new report".format(df.shape[0]))
         # saveWeatherreport(df,CASSANDRA_HOST, CASSANDRA_KEYSPACE)

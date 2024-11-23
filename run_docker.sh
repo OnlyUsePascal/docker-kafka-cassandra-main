@@ -29,6 +29,7 @@ auto_mode() {
     "kafka" \
     "producer-owm" \
     "producer-faker" \
+    "producer-custom" \
     "consumer-logging" \
     "consumer-visualize" \
   )
