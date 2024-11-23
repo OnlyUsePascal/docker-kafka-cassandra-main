@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  faker:
+    container_name: producer-custom
+    image: producer-custom
+    build: .
+    environment:
+      KAFKA_BROKER_URL: broker:9092
+      TOPIC_NAME: custom
+      SLEEP_TIME: 60
+
+networks:
+  default:
+    external:
+      name: kafka-network
