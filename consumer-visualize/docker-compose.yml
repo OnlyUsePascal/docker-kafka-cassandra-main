@@ -10,11 +10,12 @@ services:
       CASSANDRA_HOST: cassandradb
       CASSANDRA_KEYSPACE: kafkapipeline
       WEATHER_TABLE: weatherreport
-      TWITTER_TABLE: twitterdata
+      # TWITTER_TABLE: twitterdata
+      FAKER_TABLE: fakerdata    
+      CUSTOM_TABLE: customdata
     ports:
         - 8888:8888
-    volumes:
-      - ./python:/usr/app
+
 networks:
   default:
     external:
