@@ -34,3 +34,15 @@ CREATE TABLE IF NOT EXISTS kafkapipeline.fakerdata (
 TRUNCATE kafkapipeline.fakerdata;
 
 
+CREATE TABLE IF NOT EXISTS kafkapipeline.customdata (
+  time TIMESTAMP,
+  symbols list<TEXT>,
+  bid FLOAT,
+  ask FLOAT, 
+  last FLOAT,
+  PRIMARY KEY (time)
+); 
+
+TRUNCATE kafkapipeline.customdata;
+
+
