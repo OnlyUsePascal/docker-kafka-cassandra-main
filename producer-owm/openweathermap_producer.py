@@ -46,23 +46,30 @@ def run():
     )
 
     while True:
-        location = locations[(iterator + 1) % len(locations)]
-        current_weather = asyncio.run(get_weather(city=location))
-        current_weather['location'] = location
-        now = time.localtime()
-        current_weather['report_time'] = time.strftime(
-            "%Y-%m-%d %H:%M:%S", now)
-        current_weather = current_weather.to_json(orient="records")
-        sendit = current_weather[1:-1]
-        print(sendit)
+        try:
+            location = locations[(iterator + 1) % len(locations)]
+            current_weather = asyncio.run(get_weather(city=location))
+            current_weather['location'] = location
+            now = time.localtime()
+            current_weather['report_time'] = time.strftime(
+                "%Y-%m-%d %H:%M:%S", now)
+            current_weather = current_weather.to_json(orient="records")
+            sendit = current_weather[1:-1]
+            print(sendit)
 
-        # adding prints for debugging in logs
-        print("Sending new weather report iteration - {}".format(iterator))
-        producer.send(TOPIC_NAME, value=sendit)
-        print("New weather report sent")
-        time.sleep(repeat_request)
-        print("Waking up!")
-        iterator += 1
+            # adding prints for debugging in logs
+            print("Sending new weather report iteration - {}".format(iterator))
+            producer.send(TOPIC_NAME, value=sendit)
+            print("New weather report sent")
+
+        except Exception as err:
+            print('Something went wrong !')
+            print(err)
+
+        finally:
+            time.sleep(repeat_request)
+            print("Waking up!")
+            iterator += 1
 
 
 if __name__ == "__main__":
