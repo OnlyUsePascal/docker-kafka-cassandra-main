@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  datavis:
+    container_name: data-visualize
+    hostname: data-visualize
+    image: consumer-vis
+    build: .
+    environment:
+      CASSANDRA_HOST: cassandradb
+      CASSANDRA_KEYSPACE: kafkapipeline
+      WEATHER_TABLE: weatherreport
+      # TWITTER_TABLE: twitterdata
+      FAKER_TABLE: fakerdata    
+      CUSTOM_TABLE: customdata
+    ports:
+        - 8888:8888
+
+networks:
+  default:
+    external:
+      name: cassandra-network
