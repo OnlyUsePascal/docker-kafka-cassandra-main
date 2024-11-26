@@ -20,7 +20,7 @@ auto_mode() {
     "producer-faker" \
     "producer-custom" \
     "consumer-logging" \
-    "consumer-visualize" \
+    "data-visualize" \
   )
 
   echo '=> Rerunning containers ...'

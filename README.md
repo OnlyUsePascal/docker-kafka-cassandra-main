@@ -13,11 +13,11 @@ This work is based on the following Github repositories:
 
 # Instructions
 
-![alt text](image.png)
+![alt text](image-1.png)
 
 The containers will be run in the following orders
 
-1. `datawarehouse`: A Cassandra database for storing the event stream
+1. `warehouse`: A Cassandra database for storing the event stream
 
 2. `kafka`: An event streaming service.
 
@@ -30,6 +30,7 @@ The containers will be run in the following orders
 
 ```bash
 $ docker network create kafka-network                         # create a new docker network for kafka cluster (zookeeper, broker, kafka-manager services, and kafka connect sink services)
+
 $ docker network create cassandra-network                     # create a new docker network for cassandra. (kafka connect will exist on this network as well in addition to kafka-network)
 ```
 
