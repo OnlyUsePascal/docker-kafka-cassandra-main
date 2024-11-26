@@ -1,16 +1,5 @@
 #!/bin/bash
 
-# docker_path=$1
-# opts=$2
-
-# docker compose \
-#   -f $docker_path/docker-compose.yml \
-#   --env-file .env \
-#   up \
-#   --detach \
-#   --build \
-#   $opts
-
 # Function to display usage
 usage() {
   echo "Usage: $0 -auto | -name <name>"
@@ -19,7 +8,7 @@ usage() {
 
 # Function for auto mode
 auto_mode() {
-  echo "Auto mode selected."
+  echo "=> Auto mode selected."
 
   # echo 'Stopping containers ...'
   # docker stop $(docker ps -a -q)
@@ -34,11 +23,11 @@ auto_mode() {
     "consumer-visualize" \
   )
 
-  echo 'Rerunning containers ...'
+  echo '=> Rerunning containers ...'
   for container in "${containers[@]}"; do
     echo "Running container: $container"
     name_mode "$container"
-    sleep 3
+    sleep 10
   done
 }
 
@@ -51,7 +40,7 @@ name_mode() {
       usage
   fi
 
-  echo "Docker path: $docker_path || Opts: $opts"
+  echo "=> Docker path: $docker_path || Opts: $opts"
   docker compose \
     -f $docker_path/docker-compose.yml \
     --env-file .env \
