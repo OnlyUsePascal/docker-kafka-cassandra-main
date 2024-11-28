@@ -25,12 +25,10 @@ sc = connect(apiInfo.name,
              _auth={'access_token': apiInfo.access_token},
              _concurrency=3)
 
-
 async def get_weather(city):
     # Get the current weather details for the given city.
     df_weather = await sc.query("weather", q=city)
     return df_weather
-
 
 def run():
     locations = ["Ho Chi Minh", "Melbourne"]

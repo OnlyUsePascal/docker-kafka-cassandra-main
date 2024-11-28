@@ -13,7 +13,7 @@ This work is based on the following Github repositories:
 
 # Instructions
 
-![alt text](image-1.png)
+![alt text](readme-img/image-1.png)
 
 The containers will be run in the following orders
 
@@ -23,8 +23,7 @@ The containers will be run in the following orders
 
 3. `producer`: The event sources that continously stream data in real-time.
 
-3. `customer`: The sinks that uses event data for visualization or logging.  
-
+3. `consumer-logging` and `data-visualize`
 
 ## Create docker networks
 
@@ -119,7 +118,7 @@ $ ./run_docker.sh -name producer-custom
 ## Kafka
 ```bash
 # start single zookeeper, broker, kafka-manager and kafka-connect services
-$ docker compose -f kafka/docker-compose.yml up -d            
+$ docker compose -f kafka/docker-compose.yml up --build -d            
 
 # or 
 $ ./run_docker.sh -name kafka
@@ -156,48 +155,52 @@ $ docker exec -it connect bash
 
 ## Consumers
 
+To health-check the event system, run the 'consumer-loggin` container
 
+```bash
+$ docker compose -f consumer-logging/docker-compose.yml up --build -d            
 
+# or 
+$ ./run_docker.sh -name consumer-logging
+```
 
+This service will listen for events from any all topics registered above. If everything is working, it will continously print out messages like this
 
+![alt text](readme-img/image.png)
 
+## Data Visualize
 
-
-
-
-
-
-
-
-
-
-
-## Check that data is arriving to Cassandra
+### Check that data is arriving to Cassandra
 
 First login into Cassandra's container with the following command or open a new CLI from Docker Desktop if you use that.
+
 ```bash
 $ docker exec -it cassandra bash
 ```
+
 Once loged in, bring up cqlsh with this command and query twitterdata and weatherreport tables like this:
+
 ```bash
 $ cqlsh --cqlversion=3.4.4 127.0.0.1 #make sure you use the correct cqlversion
 
 cqlsh> use kafkapipeline; #keyspace name
 
-cqlsh:kafkapipeline> select * from twitterdata;
-
 cqlsh:kafkapipeline> select * from weatherreport;
+
+cqlsh:kafkapipeline> select * from fakerdata;
+
+cqlsh:kafkapipeline> select * from customdata;
 ```
 
-And that's it! you should be seeing records coming in to Cassandra. Feel free to play around with it by bringing down containers and then up again to see the magic of fault tolerance!
-
-
-## Visualization
+## Jupyter Notebook
 
 Run the following command the go to http://localhost:8888 and run the visualization notebook accordingly
 
-```
-docker compose -f data-vis/docker-compose.yml up -d
+```bash
+$ docker compose -f data-visualize/docker-compose.yml up --build -d            
+
+# or 
+$ ./run_docker.sh -name data-visualize
 ```
 
 ## Teardown
@@ -221,13 +224,15 @@ $ ./clean_docker.sh -img
 To stop all running kakfa cluster services
 
 ```bash
-$ docker compose -f data-vis/docker-compose.yml down # stop visualization node
+$ docker compose -f data-visualize/docker-compose.yml down # stop visualization node
 
-$ docker compose -f consumers/docker-compose.yml down          # stop the consumers
+$ docker compose -f consumer-logging/docker-compose.yml down          # stop the consumers
 
-$ docker compose -f owm-producer/docker-compose.yml down       # stop open weather map producer
+$ docker compose -f producer-owm/docker-compose.yml down       # stop open weather map producer
 
-$ docker compose -f twitter-producer/docker-compose.yml down   # stop twitter producer
+$ docker compose -f producer-custom/docker-compose.yml down       # stop open weather map producer
+
+$ docker compose -f producer-faker/docker-compose.yml down       # stop open weather map producer
 
 $ docker compose -f kafka/docker-compose.yml down              # stop zookeeper, broker, kafka-manager and kafka-connect services
 
@@ -240,6 +245,7 @@ To remove the kafka-network network:
 
 ```bash
 $ docker network rm kafka-network
+
 $ docker network rm cassandra-network
 ```
 
@@ -257,4 +263,8 @@ $ docker builder prune # remove all build cache (you have to pull data again in 
 $ docker system prune -a # basically remove everything
 ```
 
+# Data Visualization and Analysis
 
+For data visualization and analysis, please refer to file [`blog-visuals.ipynb`](./data-visualize/python/blog-visuals.ipynb). A variety of charts will be provided along with their analysis on the topic situation, involving the city's weather, generative data from faker API, and crypto exchange rates.
+
+> Note: Although the cells can be re-executed, it is not recommended as the data can be renewed with fragmented data, which may negatively impact the analysis attached to it.  

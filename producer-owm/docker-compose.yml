@@ -4,7 +4,6 @@ services:
   openweathermap:
     container_name: producer-owm
     image: producer-owm
-    
     build: .
     environment:
       KAFKA_BROKER_URL: broker:9092
